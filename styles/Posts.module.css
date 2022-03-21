@@ -1,0 +1,16 @@
+.page {
+    margin: 1em;
+}
+
+.cardStack {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    padding: 0.5em;
+    background-color: lightgray;
+    max-width: 25vw;
+    border-radius: 0.5em;
+    margin: 0.5em;
+}
