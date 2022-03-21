@@ -7,12 +7,12 @@ import React, {
 
 type AuthContextType = {
     token: string
-    setToken: Dispatch<SetStateAction<string>> | undefined
+    setToken: Dispatch<SetStateAction<string>> | Function
 }
 
 const authContextDefaults: AuthContextType = {
     token: '',
-    setToken: undefined
+    setToken: () => {}
  }
 
 export const AuthContext = React.createContext(authContextDefaults)

@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 
-import { AuthProvider } from '../context/Auth'
+import { AuthProvider } from '@/context/Auth'
 
 import '@/styles/globals.css'
 

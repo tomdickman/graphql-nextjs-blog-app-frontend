@@ -1,21 +1,32 @@
 import Layout from '@/components/Layout'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import slugify from 'slugify'
 
 import { getPosts } from '@/adapters/posts'
 
 import styles from '@/styles/Posts.module.css'
+import { AuthContext } from '@/context/Auth'
 
-export type PostsPageProps = {
-    posts: [{ 
-        title: string
-        content: string 
-    }]
+export type Post = { 
+    title: string
+    content: string 
 }
 
-const PostsPage = ({ posts }: PostsPageProps) => {
-  return (
-      <Layout>
+const PostsPage = () => {
+    const authContext = useContext(AuthContext)
+    const [posts, setPosts] = useState<Post[]>([])
+
+    useEffect(() => {
+        if (authContext.token.length > 0) {
+            getPosts(authContext.token).then(posts => {
+                console.log(posts)
+                setPosts(posts)
+            })
+        }
+    }, [authContext])
+
+    return (
+        <Layout>
             <div className={styles.page}>
                 <h1>Posts</h1>
                     <div className={styles.cardStack}>
@@ -29,23 +40,8 @@ const PostsPage = ({ posts }: PostsPageProps) => {
                         })}
                     </div>
             </div>
-      </Layout>
+        </Layout>
   )
-}
-
-export const getStaticProps = async () => {
-    let posts = []
-
-    try {
-        posts = await getPosts()
-    } catch(error) {
-        console.log(error)
-    }
-
-    return {
-        props: { posts },
-        revalidate: 10
-    }
 }
 
 export default PostsPage

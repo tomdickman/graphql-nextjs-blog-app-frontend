@@ -1,0 +1,10 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    margin: auto;
+}
+
+.loginForm button[type='submit'] {
+    margin-top: 1em;
+}
